@@ -40,8 +40,7 @@ export default {
           string += "]]";
           return(string);
         } else {
-          quote.textContent = "An error occured";
-          console.log(data);
+          console.error(data);
         }
     };
   },
