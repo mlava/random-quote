@@ -6,7 +6,7 @@ const args = {
 
 const args1 = {
   text: "STOICQUOTE",
-  help: "Import a Random Stoic Quote from stoic-quotes.com/",
+  help: "Import a Random Stoic Quote from stoic-quotes.com",
   handler: (context) => fetchStoicQuote,
 };
 
