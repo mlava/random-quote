@@ -1,4 +1,8 @@
-Import a random quote from the collection at quotable.io to your Roam Research graph. Or, import a random stoicism quote from the collection at stoic-quotes.com.
+Import a random quote from the collections at 
+- quotable.io 
+- stoic-quotes.com
+- Quote Garden
+- Ron Swanson quotes
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -7,3 +11,7 @@ The extension formats the quote as a blockquote with a link to the name of the a
 Random Quotes from Quotable can be triggered from the Command Palette command Random Quote or via the SmartBlock command <%RANDOMQUOTE%>.
 
 Stoicism Quotes from stoic-quotes.com can be triggered from the Command Palette command Stoic Quote or via the SmartBlock command <%STOICQUOTE%>.
+
+Quote Garden quotes can be triggered from the Command Palette command Quote Garden Quote or via the SmartBlock command <%GARDENQUOTE%>.
+
+Ron Swanson quotes can be triggered from the Command Palette command Ron Swanson Quote or via the SmartBlock command <%SWANSONQUOTE%>.
