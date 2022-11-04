@@ -230,7 +230,6 @@ async function fetchGardenQuote() {
 async function fetchGOTQuote() {
   const response = await fetch("https://api.gameofthronesquotes.xyz/v1/random");
   const data = await response.json();
-  console.info(response, data)
   if (response.ok) {
     let string = "> ";
     string += data.sentence;
