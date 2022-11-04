@@ -3,6 +3,8 @@ Import a random quote from the collections at
 - stoic-quotes.com
 - Quote Garden
 - Ron Swanson quotes
+- Lord of the Rings quotes
+- Game of Thrones quotes
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -15,3 +17,7 @@ Stoicism Quotes from stoic-quotes.com can be triggered from the Command Palette 
 Quote Garden quotes can be triggered from the Command Palette command Quote Garden Quote or via the SmartBlock command <%GARDENQUOTE%>.
 
 Ron Swanson quotes can be triggered from the Command Palette command Ron Swanson Quote or via the SmartBlock command <%SWANSONQUOTE%>.
+
+Lord of the Rings quotes can be triggered from the Command Palette command Tolkien Quote or via the SmartBlock command <%TOLKIENQUOTE%>.
+
+Game of Thrones quotes can be triggered from the Command Palette command Game of Thrones Quote or via the SmartBlock command <%GOTQUOTE%>.
