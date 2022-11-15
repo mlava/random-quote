@@ -34,6 +34,12 @@ const args5 = {
   handler: (context) => fetchGOTQuote,
 };
 
+const args6 = {
+  text: "ANIMEQUOTE",
+  help: "Import a quote from Animechan",
+  handler: (context) => fetchAnimeQuote,
+};
+
 export default {
   onload: ({ extensionAPI }) => {
     window.roamAlphaAPI.ui.commandPalette.addCommand({
@@ -102,6 +108,17 @@ export default {
         })
       ),
     });
+    window.roamAlphaAPI.ui.commandPalette.addCommand({
+      label: "Animechan Quote",
+      callback: () => fetchAnimeQuote().then(string =>
+        window.roamAlphaAPI.updateBlock({
+          block: {
+            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
+            string: string,
+          }
+        })
+      ),
+    });
 
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -109,7 +126,8 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args2);
       window.roamjs.extension.smartblocks.registerCommand(args3);
       window.roamjs.extension.smartblocks.registerCommand(args4);
-      window.roamjs.extension.smartblocks.registerCommand(args5)
+      window.roamjs.extension.smartblocks.registerCommand(args5);
+      window.roamjs.extension.smartblocks.registerCommand(args6);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -120,7 +138,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args2) &&
           window.roamjs.extension.smartblocks.registerCommand(args3) &&
           window.roamjs.extension.smartblocks.registerCommand(args4) &&
-          window.roamjs.extension.smartblocks.registerCommand(args5)
+          window.roamjs.extension.smartblocks.registerCommand(args5) &&
+          window.roamjs.extension.smartblocks.registerCommand(args6)
       );
     }
   },
@@ -143,6 +162,9 @@ export default {
     window.roamAlphaAPI.ui.commandPalette.removeCommand({
       label: 'Game of Thrones Quote'
     });
+    window.roamAlphaAPI.ui.commandPalette.removeCommand({
+      label: 'Animechan Quote'
+    });
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.unregisterCommand("RANDOMQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("STOICQUOTE");
@@ -150,6 +172,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("SWANSONQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("GARDENQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("GOTQUOTE");
+      window.roamjs.extension.smartblocks.unregisterCommand("ANIMEQUOTE");
     }
   }
 }
@@ -235,6 +258,23 @@ async function fetchGOTQuote() {
     string += data.sentence;
     string += " \n\n[[";
     string += data.character.name;
+    string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
+async function fetchAnimeQuote() {
+  const response = await fetch("https://animechan.vercel.app/api/random");
+  const data = await response.json();
+  if (response.ok) {
+    let string = "> ";
+    string += data.quote;
+    string += " \n\n[[";
+    string += data.character;
+    string += "]] in [[";
+    string += data.anime;
     string += "]]";
     return (string);
   } else {
