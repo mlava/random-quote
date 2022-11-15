@@ -40,6 +40,12 @@ const args6 = {
   handler: (context) => fetchAnimeQuote,
 };
 
+const args7 = {
+  text: "DADJOKE",
+  help: "Import a random Dad joke",
+  handler: (context) => fetchDadJoke,
+};
+
 export default {
   onload: ({ extensionAPI }) => {
     window.roamAlphaAPI.ui.commandPalette.addCommand({
@@ -119,6 +125,17 @@ export default {
         })
       ),
     });
+    window.roamAlphaAPI.ui.commandPalette.addCommand({
+      label: "Random Dad Joke",
+      callback: () => fetchDadJoke().then(string =>
+        window.roamAlphaAPI.updateBlock({
+          block: {
+            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
+            string: string,
+          }
+        })
+      ),
+    });
 
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -128,6 +145,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args4);
       window.roamjs.extension.smartblocks.registerCommand(args5);
       window.roamjs.extension.smartblocks.registerCommand(args6);
+      window.roamjs.extension.smartblocks.registerCommand(args7);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -139,7 +157,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args3) &&
           window.roamjs.extension.smartblocks.registerCommand(args4) &&
           window.roamjs.extension.smartblocks.registerCommand(args5) &&
-          window.roamjs.extension.smartblocks.registerCommand(args6)
+          window.roamjs.extension.smartblocks.registerCommand(args6) &&
+          window.roamjs.extension.smartblocks.registerCommand(args7)
       );
     }
   },
@@ -165,6 +184,9 @@ export default {
     window.roamAlphaAPI.ui.commandPalette.removeCommand({
       label: 'Animechan Quote'
     });
+    window.roamAlphaAPI.ui.commandPalette.removeCommand({
+      label: 'Random Dad joke'
+    });
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.unregisterCommand("RANDOMQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("STOICQUOTE");
@@ -173,6 +195,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("GARDENQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("GOTQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("ANIMEQUOTE");
+      window.roamjs.extension.smartblocks.unregisterCommand("DADJOKE");
     }
   }
 }
@@ -276,6 +299,26 @@ async function fetchAnimeQuote() {
     string += "]] in [[";
     string += data.anime;
     string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
+async function fetchDadJoke() {
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+    var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  const response = await fetch("https://icanhazdadjoke.com/", requestOptions);
+  const data = await response.json();
+  if (response.ok) {
+    let string = "> ";
+    string += data.joke;
     return (string);
   } else {
     console.error(data);
