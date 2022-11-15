@@ -6,6 +6,7 @@ Import a random quote from the collections at
 - Lord of the Rings quotes
 - Game of Thrones quotes
 - anime quotes from Animechan
+- Dad jokes from icanhazdadjoke.com
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -24,3 +25,5 @@ Lord of the Rings quotes can be triggered from the Command Palette command Tolki
 Game of Thrones quotes can be triggered from the Command Palette command Game of Thrones Quote or via the SmartBlock command <%GOTQUOTE%>.
 
 Animechan quotes can be triggered from the Command Palette command Animechan Quote or via the SmartBlock command <%ANIMEQUOTE%>.
+
+Dad Jokes can be triggered from the Command Palette command Random Dad Joke or via the SmartBlock command <%DADJOKE%>.
