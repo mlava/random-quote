@@ -50,91 +50,163 @@ export default {
   onload: ({ extensionAPI }) => {
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Random Quote",
-      callback: () => fetchRandomQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchRandomQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Stoic Quote",
-      callback: () => fetchStoicQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchStoicQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Tolkien Quote",
-      callback: () => fetchTolkienQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchTolkienQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Ron Swanson Quote",
-      callback: () => fetchSwansonQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchSwansonQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Quote Garden Quote",
-      callback: () => fetchGardenQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchGardenQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Game of Thrones Quote",
-      callback: () => fetchGOTQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchGOTQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Animechan Quote",
-      callback: () => fetchAnimeQuote().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchAnimeQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Random Dad Joke",
-      callback: () => fetchDadJoke().then(string =>
-        window.roamAlphaAPI.updateBlock({
-          block: {
-            uid: window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"],
-            string: string,
-          }
-        })
-      ),
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchDadJoke().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
     });
 
     if (window.roamjs?.extension?.smartblocks) {
@@ -185,7 +257,7 @@ export default {
       label: 'Animechan Quote'
     });
     window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Random Dad joke'
+      label: 'Random Dad Joke'
     });
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.unregisterCommand("RANDOMQUOTE");
@@ -308,7 +380,7 @@ async function fetchAnimeQuote() {
 async function fetchDadJoke() {
   var myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
-    var requestOptions = {
+  var requestOptions = {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
