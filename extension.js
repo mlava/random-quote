@@ -48,6 +48,19 @@ const args7 = {
 
 export default {
   onload: ({ extensionAPI }) => {
+    const config = {
+      tabTitle: "Random Quotes",
+      settings: [
+        {
+          id: "tolkien-api",
+          name: "The One API key",
+          description: "API Key from The One API at https://the-one-api.dev/account",
+          action: { type: "input", placeholder: "Add API key here" },
+        },
+      ]
+    };
+    extensionAPI.settings.panel.create(config);
+
     window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Random Quote",
       callback: () => {
@@ -233,6 +246,67 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args7)
       );
     }
+
+    async function fetchTolkienQuote() {
+      var key, numberProducts;
+      breakme: {
+        if (!extensionAPI.settings.get("tolkien-api")) {
+          key = "API";
+          sendConfigAlert(key);
+          break breakme;
+        } else {
+          const apiKey = extensionAPI.settings.get("tolkien-api");
+
+          let random = randomIntFromInterval(1, 2384);
+          var myHeaders = new Headers();
+          var bearer = 'Bearer ' + apiKey;
+          myHeaders.append("Authorization", bearer);
+          var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+          };
+          var string, name, film;
+          const response = await fetch("https://the-one-api.dev/v2/quote?offset=" + random + "&limit=1", requestOptions);
+          if (response.ok) {
+            const data = await response.json();
+            console.info(data);
+            string = "> ";
+            string += data.docs[0].dialog;
+
+            const response1 = await fetch("https://the-one-api.dev/v2/character/" + data.docs[0].character, requestOptions)
+            if (response1.ok) {
+              const data1 = await response1.json();
+              console.info(data1);
+              name = data1.docs[0].name;
+            }
+            const response2 = await fetch("https://the-one-api.dev/v2/movie/" + data.docs[0].movie, requestOptions)
+            if (response2.ok) {
+              const data2 = await response2.json();
+              console.info(data2);
+              film = data2.docs[0].name;
+            }
+
+            if (name != undefined) {
+              string += " \n\n[[";
+              string += name;
+              string += "]]";
+            }
+            if (film != undefined) {
+              string += " in [[";
+              string += film;
+            }
+            string += "]]";
+
+            return (string);
+          } else {
+            console.error(data);
+            alert("Failed to fetch data from The One API");
+            return;
+          }
+        }
+      };
+    }
   },
   onunload: () => {
     window.roamAlphaAPI.ui.commandPalette.removeCommand({
@@ -293,21 +367,6 @@ async function fetchStoicQuote() {
   if (response.ok) {
     let string = "> ";
     string += data.text;
-    string += " \n\n[[";
-    string += data.author;
-    string += "]]";
-    return (string);
-  } else {
-    console.error(data);
-  }
-};
-
-async function fetchTolkienQuote() {
-  const response = await fetch("https://lotr-random-quote-api.herokuapp.com/api/quote");
-  const data = await response.json();
-  if (response.ok) {
-    let string = "> ";
-    string += data.quote;
     string += " \n\n[[";
     string += data.author;
     string += "]]";
@@ -395,4 +454,14 @@ async function fetchDadJoke() {
   } else {
     console.error(data);
   }
+}
+
+function sendConfigAlert(key) {
+  if (key == "API") {
+    alert("Please enter your API key in the configuration settings via the Roam Depot tab.");
+  }
+}
+
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
