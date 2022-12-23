@@ -1,51 +1,3 @@
-const args = {
-  text: "RANDOMQUOTE",
-  help: "Import a Random Quote from Quotable.io",
-  handler: (context) => fetchRandomQuote,
-};
-
-const args1 = {
-  text: "STOICQUOTE",
-  help: "Import a Random Stoic Quote from stoic-quotes.com",
-  handler: (context) => fetchStoicQuote,
-};
-
-const args2 = {
-  text: "TOLKIENQUOTE",
-  help: "Import a Random Quote from lotr-random-quote-api.herokuapp.com",
-  handler: (context) => fetchTolkienQuote,
-};
-
-const args3 = {
-  text: "SWANSONQUOTE",
-  help: "Import a random Ron Swanson quote from ron-swanson-quotes.herokuapp.com",
-  handler: (context) => fetchSwansonQuote,
-};
-
-const args4 = {
-  text: "GARDENQUOTE",
-  help: "Import a random quote from Quote Garden",
-  handler: (context) => fetchGardenQuote,
-};
-
-const args5 = {
-  text: "GOTQUOTE",
-  help: "Import a Game of Thrones quote",
-  handler: (context) => fetchGOTQuote,
-};
-
-const args6 = {
-  text: "ANIMEQUOTE",
-  help: "Import a quote from Animechan",
-  handler: (context) => fetchAnimeQuote,
-};
-
-const args7 = {
-  text: "DADJOKE",
-  help: "Import a random Dad joke",
-  handler: (context) => fetchDadJoke,
-};
-
 export default {
   onload: ({ extensionAPI }) => {
     const config = {
@@ -222,6 +174,53 @@ export default {
       }
     });
 
+    const args = {
+      text: "RANDOMQUOTE",
+      help: "Import a Random Quote from Quotable.io",
+      handler: (context) => fetchRandomQuote,
+    };
+    
+    const args1 = {
+      text: "STOICQUOTE",
+      help: "Import a Random Stoic Quote from stoic-quotes.com",
+      handler: (context) => fetchStoicQuote,
+    };
+    
+    const args2 = {
+      text: "TOLKIENQUOTE",
+      help: "Import a Random Quote from lotr-random-quote-api.herokuapp.com",
+      handler: (context) => fetchTolkienQuote,
+    };
+    
+    const args3 = {
+      text: "SWANSONQUOTE",
+      help: "Import a random Ron Swanson quote from ron-swanson-quotes.herokuapp.com",
+      handler: (context) => fetchSwansonQuote,
+    };
+    
+    const args4 = {
+      text: "GARDENQUOTE",
+      help: "Import a random quote from Quote Garden",
+      handler: (context) => fetchGardenQuote,
+    };
+    
+    const args5 = {
+      text: "GOTQUOTE",
+      help: "Import a Game of Thrones quote",
+      handler: (context) => fetchGOTQuote,
+    };
+    
+    const args6 = {
+      text: "ANIMEQUOTE",
+      help: "Import a quote from Animechan",
+      handler: (context) => fetchAnimeQuote,
+    };
+    
+    const args7 = {
+      text: "DADJOKE",
+      help: "Import a random Dad joke",
+      handler: (context) => fetchDadJoke,
+    };
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
       window.roamjs.extension.smartblocks.registerCommand(args1);
@@ -298,7 +297,7 @@ export default {
             }
             string += "]]";
 
-            return (string);
+            return string;
           } else {
             console.error(data);
             alert("Failed to fetch data from The One API");
