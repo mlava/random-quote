@@ -3,7 +3,7 @@ Import a random quote from the collections at
 - stoic-quotes.com
 - Quote Garden
 - Ron Swanson quotes
-- Lord of the Rings quotes
+- The One API - Lord of the Rings quotes
 - Game of Thrones quotes
 - anime quotes from Animechan
 - Dad jokes from icanhazdadjoke.com
@@ -20,7 +20,7 @@ Quote Garden quotes can be triggered from the Command Palette command Quote Gard
 
 Ron Swanson quotes can be triggered from the Command Palette command Ron Swanson Quote or via the SmartBlock command <%SWANSONQUOTE%>.
 
-Lord of the Rings quotes can be triggered from the Command Palette command Tolkien Quote or via the SmartBlock command <%TOLKIENQUOTE%>.
+Lord of the Rings quotes can be triggered from the Command Palette command Tolkien Quote or via the SmartBlock command <%TOLKIENQUOTE%>. This requires a free API key from https://the-one-api.dev/account.
 
 Game of Thrones quotes can be triggered from the Command Palette command Game of Thrones Quote or via the SmartBlock command <%GOTQUOTE%>.
 
