@@ -94,26 +94,6 @@ export default {
       }
     });
     window.roamAlphaAPI.ui.commandPalette.addCommand({
-      label: "Quote Garden Quote",
-      callback: () => {
-        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
-        if (uid == undefined) {
-          alert("Please focus a block before importing a quote");
-          return;
-        } else {
-          window.roamAlphaAPI.updateBlock(
-            { block: { uid: uid, string: "Loading...".toString(), open: true } });
-        }
-        fetchGardenQuote().then(string =>
-          window.roamAlphaAPI.updateBlock({
-            block: {
-              uid: uid,
-              string: string,
-            }
-          }))
-      }
-    });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
       label: "Game of Thrones Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -198,12 +178,6 @@ export default {
       handler: (context) => fetchSwansonQuote,
     };
     
-    const args4 = {
-      text: "GARDENQUOTE",
-      help: "Import a random quote from Quote Garden",
-      handler: (context) => fetchGardenQuote,
-    };
-    
     const args5 = {
       text: "GOTQUOTE",
       help: "Import a Game of Thrones quote",
@@ -226,7 +200,6 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args1);
       window.roamjs.extension.smartblocks.registerCommand(args2);
       window.roamjs.extension.smartblocks.registerCommand(args3);
-      window.roamjs.extension.smartblocks.registerCommand(args4);
       window.roamjs.extension.smartblocks.registerCommand(args5);
       window.roamjs.extension.smartblocks.registerCommand(args6);
       window.roamjs.extension.smartblocks.registerCommand(args7);
@@ -239,7 +212,6 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args1) &&
           window.roamjs.extension.smartblocks.registerCommand(args2) &&
           window.roamjs.extension.smartblocks.registerCommand(args3) &&
-          window.roamjs.extension.smartblocks.registerCommand(args4) &&
           window.roamjs.extension.smartblocks.registerCommand(args5) &&
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
           window.roamjs.extension.smartblocks.registerCommand(args7)
@@ -321,9 +293,6 @@ export default {
       label: 'Ron Swanson Quote'
     });
     window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Quote Garden Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
       label: 'Game of Thrones Quote'
     });
     window.roamAlphaAPI.ui.commandPalette.removeCommand({
@@ -337,7 +306,6 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("STOICQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("TOLKIENQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("SWANSONQUOTE");
-      window.roamjs.extension.smartblocks.unregisterCommand("GARDENQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("GOTQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("ANIMEQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("DADJOKE");
@@ -382,21 +350,6 @@ async function fetchSwansonQuote() {
     let string = "> ";
     string += data[0];
     string += " \n\n[[Ron Swanson]]";
-    return (string);
-  } else {
-    console.error(data);
-  }
-};
-
-async function fetchGardenQuote() {
-  const response = await fetch("https://quote-garden.herokuapp.com/api/v3/quotes/random");
-  const data = await response.json();
-  if (response.ok) {
-    let string = "> ";
-    string += data.data[0].quoteText;
-    string += " \n\n[[";
-    string += data.data[0].quoteAuthor;
-    string += "]]";
     return (string);
   } else {
     console.error(data);
