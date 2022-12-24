@@ -1,7 +1,6 @@
 Import a random quote from the collections at 
 - quotable.io 
 - stoic-quotes.com
-- Quote Garden
 - Ron Swanson quotes
 - The One API - Lord of the Rings quotes
 - Game of Thrones quotes
@@ -16,8 +15,6 @@ Random Quotes from Quotable can be triggered from the Command Palette command Ra
 
 Stoicism Quotes from stoic-quotes.com can be triggered from the Command Palette command Stoic Quote or via the SmartBlock command <%STOICQUOTE%>.
 
-Quote Garden quotes can be triggered from the Command Palette command Quote Garden Quote or via the SmartBlock command <%GARDENQUOTE%>.
-
 Ron Swanson quotes can be triggered from the Command Palette command Ron Swanson Quote or via the SmartBlock command <%SWANSONQUOTE%>.
 
 Lord of the Rings quotes can be triggered from the Command Palette command Tolkien Quote or via the SmartBlock command <%TOLKIENQUOTE%>. This requires a free API key from https://the-one-api.dev/account.
@@ -27,3 +24,7 @@ Game of Thrones quotes can be triggered from the Command Palette command Game of
 Animechan quotes can be triggered from the Command Palette command Animechan Quote or via the SmartBlock command <%ANIMEQUOTE%>.
 
 Dad Jokes can be triggered from the Command Palette command Random Dad Joke or via the SmartBlock command <%DADJOKE%>.
+
+**Note:**
+- Quote Garden API is no longer available and this source has therefore been removed
+- Tolkien Quotes API is also no longer available, and has been replaced by The One API instead
