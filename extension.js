@@ -241,20 +241,17 @@ export default {
           const response = await fetch("https://the-one-api.dev/v2/quote?offset=" + random + "&limit=1", requestOptions);
           if (response.ok) {
             const data = await response.json();
-            console.info(data);
             string = "> ";
             string += data.docs[0].dialog;
 
             const response1 = await fetch("https://the-one-api.dev/v2/character/" + data.docs[0].character, requestOptions)
             if (response1.ok) {
               const data1 = await response1.json();
-              console.info(data1);
               name = data1.docs[0].name;
             }
             const response2 = await fetch("https://the-one-api.dev/v2/movie/" + data.docs[0].movie, requestOptions)
             if (response2.ok) {
               const data2 = await response2.json();
-              console.info(data2);
               film = data2.docs[0].name;
             }
 
