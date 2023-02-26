@@ -6,6 +6,7 @@ Import a random quote from the collections at
 - Game of Thrones quotes
 - anime quotes from Animechan
 - Dad jokes from icanhazdadjoke.com
+- Quotes on Design
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -24,6 +25,8 @@ Game of Thrones quotes can be triggered from the Command Palette command Game of
 Animechan quotes can be triggered from the Command Palette command Animechan Quote or via the SmartBlock command <%ANIMEQUOTE%>.
 
 Dad Jokes can be triggered from the Command Palette command Random Dad Joke or via the SmartBlock command <%DADJOKE%>.
+
+Quotes on Design can be triggered from the Command Palette command Random Quote from Quotes on Design or via the SmartBlock command <%QUOTESONDESIGN%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
