@@ -13,7 +13,7 @@ export default {
     };
     extensionAPI.settings.panel.create(config);
 
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Random Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -33,7 +33,7 @@ export default {
           }))
       }
     });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Stoic Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -53,7 +53,7 @@ export default {
           }))
       }
     });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Tolkien Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -73,7 +73,7 @@ export default {
           }))
       }
     });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Ron Swanson Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -93,7 +93,7 @@ export default {
           }))
       }
     });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Game of Thrones Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -113,7 +113,7 @@ export default {
           }))
       }
     });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Animechan Quote",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -133,7 +133,7 @@ export default {
           }))
       }
     });
-    window.roamAlphaAPI.ui.commandPalette.addCommand({
+    extensionAPI.ui.commandPalette.addCommand({
       label: "Random Dad Joke",
       callback: () => {
         const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
@@ -153,47 +153,73 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Quote from Quotes on Design",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchQOD().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
       help: "Import a Random Quote from Quotable.io",
       handler: (context) => fetchRandomQuote,
     };
-    
+
     const args1 = {
       text: "STOICQUOTE",
       help: "Import a Random Stoic Quote from stoic-quotes.com",
       handler: (context) => fetchStoicQuote,
     };
-    
+
     const args2 = {
       text: "TOLKIENQUOTE",
       help: "Import a Random Quote from lotr-random-quote-api.herokuapp.com",
       handler: (context) => fetchTolkienQuote,
     };
-    
+
     const args3 = {
       text: "SWANSONQUOTE",
       help: "Import a random Ron Swanson quote from ron-swanson-quotes.herokuapp.com",
       handler: (context) => fetchSwansonQuote,
     };
-    
+
     const args5 = {
       text: "GOTQUOTE",
       help: "Import a Game of Thrones quote",
       handler: (context) => fetchGOTQuote,
     };
-    
+
     const args6 = {
       text: "ANIMEQUOTE",
       help: "Import a quote from Animechan",
       handler: (context) => fetchAnimeQuote,
     };
-    
+
     const args7 = {
       text: "DADJOKE",
       help: "Import a random Dad joke",
       handler: (context) => fetchDadJoke,
+    };
+
+    const args8 = {
+      text: "QUOTESONDESIGN",
+      help: "Import a random quote from Quotes on Design",
+      handler: (context) => fetchQOD,
     };
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -203,6 +229,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args5);
       window.roamjs.extension.smartblocks.registerCommand(args6);
       window.roamjs.extension.smartblocks.registerCommand(args7);
+      window.roamjs.extension.smartblocks.registerCommand(args8);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -214,7 +241,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args3) &&
           window.roamjs.extension.smartblocks.registerCommand(args5) &&
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
-          window.roamjs.extension.smartblocks.registerCommand(args7)
+          window.roamjs.extension.smartblocks.registerCommand(args7) &&
+          window.roamjs.extension.smartblocks.registerCommand(args8)
       );
     }
 
@@ -277,27 +305,6 @@ export default {
     }
   },
   onunload: () => {
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Random Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Stoic Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Tolkien Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Ron Swanson Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Game of Thrones Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Animechan Quote'
-    });
-    window.roamAlphaAPI.ui.commandPalette.removeCommand({
-      label: 'Random Dad Joke'
-    });
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.unregisterCommand("RANDOMQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("STOICQUOTE");
@@ -306,6 +313,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("GOTQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("ANIMEQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("DADJOKE");
+      window.roamjs.extension.smartblocks.unregisterCommand("QUOTESONDESIGN");
     }
   }
 }
@@ -405,6 +413,24 @@ async function fetchDadJoke() {
   }
 }
 
+async function fetchQOD() {
+  const response = await fetch("https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand");
+
+  if (response.ok) {
+    const data = await response.json();
+    let quote = strip(data[5].content.rendered);
+    let author = strip(data[5].title.rendered);
+    let string = "> ";
+    string += quote;
+    string += " \n[[";
+    string += author;
+    string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
 function sendConfigAlert(key) {
   if (key == "API") {
     alert("Please enter your API key in the configuration settings via the Roam Depot tab.");
@@ -413,4 +439,9 @@ function sendConfigAlert(key) {
 
 function randomIntFromInterval(min, max) { // min and max included 
   return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function strip(html){
+  let doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || "";
 }
