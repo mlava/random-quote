@@ -211,50 +211,42 @@ export default {
       help: "Import a Random Quote from Quotable.io",
       handler: (context) => fetchRandomQuote,
     };
-
     const args1 = {
       text: "STOICQUOTE",
       help: "Import a Random Stoic Quote from stoic-quotes.com",
       handler: (context) => fetchStoicQuote,
     };
-
     const args2 = {
       text: "TOLKIENQUOTE",
-      help: "Import a Random Quote from lotr-random-quote-api.herokuapp.com",
+      help: "Import a Random Tolkien Quote from The One API",
       handler: (context) => fetchTolkienQuote,
     };
-
     const args3 = {
       text: "SWANSONQUOTE",
       help: "Import a random Ron Swanson quote from ron-swanson-quotes.herokuapp.com",
       handler: (context) => fetchSwansonQuote,
     };
-
-    const args5 = {
+    const args4 = {
       text: "GOTQUOTE",
       help: "Import a Game of Thrones quote",
       handler: (context) => fetchGOTQuote,
     };
-
-    const args6 = {
+    const args5 = {
       text: "ANIMEQUOTE",
       help: "Import a quote from Animechan",
       handler: (context) => fetchAnimeQuote,
     };
-
-    const args7 = {
+    const args6 = {
       text: "DADJOKE",
       help: "Import a random Dad joke",
       handler: (context) => fetchDadJoke,
     };
-
-    const args8 = {
+    const args7 = {
       text: "QUOTESONDESIGN",
       help: "Import a random quote from Quotes on Design",
       handler: (context) => fetchQOD,
     };
-
-    const args9 = {
+    const args8 = {
       text: "NINJAQUOTE",
       help: "Import a random quote from API Ninjas",
       handler: (context) => () => {
@@ -268,11 +260,11 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args1);
       window.roamjs.extension.smartblocks.registerCommand(args2);
       window.roamjs.extension.smartblocks.registerCommand(args3);
+      window.roamjs.extension.smartblocks.registerCommand(args4);
       window.roamjs.extension.smartblocks.registerCommand(args5);
       window.roamjs.extension.smartblocks.registerCommand(args6);
       window.roamjs.extension.smartblocks.registerCommand(args7);
       window.roamjs.extension.smartblocks.registerCommand(args8);
-      window.roamjs.extension.smartblocks.registerCommand(args9);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -282,16 +274,16 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args1) &&
           window.roamjs.extension.smartblocks.registerCommand(args2) &&
           window.roamjs.extension.smartblocks.registerCommand(args3) &&
+          window.roamjs.extension.smartblocks.registerCommand(args4) &&
           window.roamjs.extension.smartblocks.registerCommand(args5) &&
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
-          window.roamjs.extension.smartblocks.registerCommand(args8) &&
-          window.roamjs.extension.smartblocks.registerCommand(args9)
+          window.roamjs.extension.smartblocks.registerCommand(args8)
       );
     }
 
     async function fetchTolkienQuote() {
-      var key, numberProducts;
+      var key;
       breakme: {
         if (!extensionAPI.settings.get("tolkien-api")) {
           key = "API";
