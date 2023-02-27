@@ -260,7 +260,7 @@ export default {
       handler: (context) => () => {
         var uid = context.currentUid;
         return fetchAN(uid);
-    },
+      },
     };
 
     if (window.roamjs?.extension?.smartblocks) {
@@ -404,6 +404,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("ANIMEQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("DADJOKE");
       window.roamjs.extension.smartblocks.unregisterCommand("QUOTESONDESIGN");
+      window.roamjs.extension.smartblocks.unregisterCommand("NINJAQUOTE");
     }
   }
 }
