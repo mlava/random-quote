@@ -6,7 +6,8 @@ Import a random quote from the collections at
 - Game of Thrones quotes
 - anime quotes from Animechan
 - Dad jokes from icanhazdadjoke.com
-- Quotes on Design
+- Quotes on Design quotesondesign.com
+- API Ninja Quotes api-ninjas.com/api/quotes
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -27,6 +28,8 @@ Animechan quotes can be triggered from the Command Palette command Animechan Quo
 Dad Jokes can be triggered from the Command Palette command Random Dad Joke or via the SmartBlock command <%DADJOKE%>.
 
 Quotes on Design can be triggered from the Command Palette command Random Quote from Quotes on Design or via the SmartBlock command <%QUOTESONDESIGN%>.
+
+The API Ninja quotes API requires a free account at https://api-ninjas.com/api/quotes. You then need to add your API key in the Roam Depot Settings. You can optionally select from a dropdown menu with a series of quotation categories or leave as "None" for a purely random quote. The API Ninjas Quotes API can be triggered from the Command Palette command Random Quote from API Ninjas or via the SmartBlock command <%NINJAQUOTE%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
