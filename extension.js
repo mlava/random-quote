@@ -9,6 +9,18 @@ export default {
           description: "API Key from The One API at https://the-one-api.dev/account",
           action: { type: "input", placeholder: "Add API key here" },
         },
+        {
+          id: "api-ninjas",
+          name: "API-Ninjas key",
+          description: "API Key from API Ninjas at https://api-ninjas.com/profile",
+          action: { type: "input", placeholder: "Add API key here" },
+        },
+        {
+          id: "api-ninjas-cat",
+          name: "API-Ninjas category (optional)",
+          description: "Quote category from the list at https://api-ninjas.com/api/quotes",
+          action: { type: "select", items: ["None", "age", "alone", "amazing", "anger", "architecture", "art", "attitude", "beauty", "best", "birthday", "business", "car", "change", "communications", "computers", "cool", "courage", "dad", "dating", "death", "design", "dreams", "education", "environmental", "equality", "experience", "failure", "faith", "family", "famous", "fear", "fitness", "food", "forgiveness", "freedom", "friendship", "funny", "future", "god", "good", "government", "graduation", "great", "happiness", "health", "history", "home", "hope", "humor", "imagination", "inspirational", "intelligence", "jealousy", "knowledge", "leadership", "learning", "legal", "life", "love", "marriage", "medical", "men", "mom", "money", "morning", "movies", "success"] },
+        },
       ]
     };
     extensionAPI.settings.panel.create(config);
@@ -173,6 +185,26 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Quote from API Ninjas",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchAN(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -221,6 +253,16 @@ export default {
       help: "Import a random quote from Quotes on Design",
       handler: (context) => fetchQOD,
     };
+
+    const args9 = {
+      text: "NINJAQUOTE",
+      help: "Import a random quote from API Ninjas",
+      handler: (context) => () => {
+        var uid = context.currentUid;
+        return fetchAN(uid);
+    },
+    };
+
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
       window.roamjs.extension.smartblocks.registerCommand(args1);
@@ -230,6 +272,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args6);
       window.roamjs.extension.smartblocks.registerCommand(args7);
       window.roamjs.extension.smartblocks.registerCommand(args8);
+      window.roamjs.extension.smartblocks.registerCommand(args9);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -242,7 +285,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args5) &&
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
-          window.roamjs.extension.smartblocks.registerCommand(args8)
+          window.roamjs.extension.smartblocks.registerCommand(args8) &&
+          window.roamjs.extension.smartblocks.registerCommand(args9)
       );
     }
 
@@ -299,6 +343,52 @@ export default {
             console.error(data);
             alert("Failed to fetch data from The One API");
             return;
+          }
+        }
+      };
+    }
+
+    async function fetchAN(uid) {
+      var key, category;
+      breakme: {
+        if (!extensionAPI.settings.get("api-ninjas")) {
+          key = "API";
+          sendConfigAlert(key);
+          break breakme;
+        } else {
+          const apiKey = extensionAPI.settings.get("api-ninjas");
+          if (extensionAPI.settings.get("api-ninjas-cat")) {
+            category = extensionAPI.settings.get("api-ninjas-cat")
+          } else {
+            category = "None";
+          }
+
+          var myHeaders = new Headers();
+          myHeaders.append("X-Api-Key", apiKey);
+          var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+          };
+
+          var url = "https://api.api-ninjas.com/v1/quotes";
+          if (category != undefined && category != null && category != "None") {
+            url += "?category=" + category + "";
+          }
+
+          const response = await fetch(url, requestOptions).catch((error) => {
+            console.error("Failed to fetch data from API Ninja", error);
+            window.roamAlphaAPI.updateBlock(
+              { block: { uid: uid, string: "Call to API Ninja failed", open: true } });
+          });
+          if (response != undefined && response.ok) {
+            const data = await response.json();
+            var string = "> ";
+            string += data[0].quote;
+            string += " \n\n[[";
+            string += data[0].author;
+            string += "]]";
+            return string;
           }
         }
       };
@@ -441,7 +531,7 @@ function randomIntFromInterval(min, max) { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function strip(html){
+function strip(html) {
   let doc = new DOMParser().parseFromString(html, 'text/html');
   return doc.body.textContent || "";
 }
