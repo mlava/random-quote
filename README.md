@@ -1,3 +1,6 @@
+**New:**
+- import a quote from your own collection within your graph. Simply set the page title where you store your quotes in the settings in Roam Depot.
+
 Import a random quote from the collections at 
 - quotable.io 
 - stoic-quotes.com
