@@ -326,7 +326,7 @@ export default {
         } else {
           const parentTitle = extensionAPI.settings.get("rq-local");
           let children = await window.roamAlphaAPI.q(`[:find (pull ?page [:node/title :block/string :block/uid {:block/children ...} ]) :where [?page :node/title "${parentTitle}"] ]`);
-          console.info(children);
+
           if (children.length > 0 && children?.[0]?.[0].hasOwnProperty("children")) {
             let upper = children[0][0].children.length - 1;
             let id = randomIntFromInterval(0, upper);
