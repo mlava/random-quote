@@ -1,5 +1,8 @@
 **New:**
 - import a quote from your own collection within your graph. Simply set the page title where you store your quotes in the settings in Roam Depot.
+  - quotes are pulled from the first child blocks, and the author/speaker from the first child of the quote block (shown below)
+
+![image](https://user-images.githubusercontent.com/6857790/223036619-e0237ff0-bf4a-4d4a-a8b3-8b7894aa92df.png)
 
 Import a random quote from the collections at 
 - quotable.io 
