@@ -4,6 +4,12 @@ export default {
       tabTitle: "Random Quotes",
       settings: [
         {
+          id: "rq-local",
+          name: "Local Quotes page title",
+          description: "The title of a page in your graph with quotes",
+          action: { type: "input", placeholder: "uid here" },
+        },
+        {
           id: "tolkien-api",
           name: "The One API key",
           description: "API Key from The One API at https://the-one-api.dev/account",
@@ -205,6 +211,26 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Quote from graph",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchRandomLocalQuote().then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -254,6 +280,11 @@ export default {
         return fetchAN(uid);
       },
     };
+    const args9 = {
+      text: "LOCALQUOTE",
+      help: "Import a Random Quote from your graph",
+      handler: (context) => fetchRandomLocalQuote,
+    };
 
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -265,6 +296,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args6);
       window.roamjs.extension.smartblocks.registerCommand(args7);
       window.roamjs.extension.smartblocks.registerCommand(args8);
+      window.roamjs.extension.smartblocks.registerCommand(args9);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -278,8 +310,38 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args5) &&
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
-          window.roamjs.extension.smartblocks.registerCommand(args8)
+          window.roamjs.extension.smartblocks.registerCommand(args8) &&
+          window.roamjs.extension.smartblocks.registerCommand(args9)
       );
+    }
+
+    async function fetchRandomLocalQuote() {
+      var key;
+      var string = "";
+      breakme: {
+        if (!extensionAPI.settings.get("rq-local")) {
+          key = "UID";
+          sendConfigAlert(key);
+          break breakme;
+        } else {
+          const parentTitle = extensionAPI.settings.get("rq-local");
+          let children = await window.roamAlphaAPI.q(`[:find (pull ?page [:node/title :block/string :block/uid {:block/children ...} ]) :where [?page :node/title "${parentTitle}"] ]`);
+          console.info(children);
+          if (children.length > 0 && children?.[0]?.[0].hasOwnProperty("children")) {
+            let upper = children[0][0].children.length - 1;
+            let id = randomIntFromInterval(0, upper);
+            string = "> ";
+            string += children[0][0].children[id].string;
+            if (children[0][0].children[id].hasOwnProperty("children")) {
+              let author = children[0][0].children[id].children[0].string.toString();
+              string += " \n\n[[";
+              string += author;
+              string += "]]";
+            }
+            return string;
+          }
+        };
+      }
     }
 
     async function fetchTolkienQuote() {
@@ -397,6 +459,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("DADJOKE");
       window.roamjs.extension.smartblocks.unregisterCommand("QUOTESONDESIGN");
       window.roamjs.extension.smartblocks.unregisterCommand("NINJAQUOTE");
+      window.roamjs.extension.smartblocks.unregisterCommand("LOCALQUOTE");
     }
   }
 }
@@ -517,6 +580,8 @@ async function fetchQOD() {
 function sendConfigAlert(key) {
   if (key == "API") {
     alert("Please enter your API key in the configuration settings via the Roam Depot tab.");
+  } else if (key == "UID") {
+    alert("Please enter the title of your Quotes page in the configuration settings via the Roam Depot tab.");
   }
 }
 
