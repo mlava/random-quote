@@ -7,7 +7,7 @@ export default {
           id: "rq-local",
           name: "Local Quotes page title",
           description: "The title of a page in your graph with quotes",
-          action: { type: "input", placeholder: "uid here" },
+          action: { type: "input", placeholder: "title here" },
         },
         {
           id: "tolkien-api",
