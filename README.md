@@ -1,4 +1,5 @@
 **New:**
+- import a quote from Futurama from https://futurama-api.fly.dev/
 - import a quote from your own collection within your graph. Simply set the page title where you store your quotes in the settings in Roam Depot.
   - quotes are pulled from the first child blocks, and the author/speaker from the first child of the quote block (shown below)
 
@@ -14,6 +15,7 @@ Import a random quote from the collections at
 - Dad jokes from icanhazdadjoke.com
 - Quotes on Design quotesondesign.com
 - API Ninja Quotes api-ninjas.com/api/quotes
+- Futurama quote from futurama-api.fly.dev
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -36,6 +38,8 @@ Dad Jokes can be triggered from the Command Palette command Random Dad Joke or v
 Quotes on Design can be triggered from the Command Palette command Random Quote from Quotes on Design or via the SmartBlock command <%QUOTESONDESIGN%>.
 
 The API Ninja quotes API requires a free account at https://api-ninjas.com/api/quotes. You then need to add your API key in the Roam Depot Settings. You can optionally select from a dropdown menu with a series of quotation categories or leave as "None" for a purely random quote. The API Ninjas Quotes API can be triggered from the Command Palette command Random Quote from API Ninjas or via the SmartBlock command <%NINJAQUOTE%>.
+
+Futurama quotes can be triggered from the Command Palette command Random Quote from Futurama or via the SmartBlock command <%FUTURAMAQUOTE%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
