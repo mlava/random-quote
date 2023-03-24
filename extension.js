@@ -231,6 +231,26 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Quote from Futurama",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchFuturama(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -285,6 +305,11 @@ export default {
       help: "Import a Random Quote from your graph",
       handler: (context) => fetchRandomLocalQuote,
     };
+    const args10 = {
+      text: "FUTURAMAQUOTE",
+      help: "Import a Random Quote from Futurama",
+      handler: (context) => fetchFuturama,
+    };
 
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -297,6 +322,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args7);
       window.roamjs.extension.smartblocks.registerCommand(args8);
       window.roamjs.extension.smartblocks.registerCommand(args9);
+      window.roamjs.extension.smartblocks.registerCommand(args10);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -311,7 +337,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
           window.roamjs.extension.smartblocks.registerCommand(args8) &&
-          window.roamjs.extension.smartblocks.registerCommand(args9)
+          window.roamjs.extension.smartblocks.registerCommand(args9) &&
+          window.roamjs.extension.smartblocks.registerCommand(args10)
       );
     }
 
@@ -569,6 +596,37 @@ async function fetchQOD() {
     let string = "> ";
     string += quote;
     string += " \n[[";
+    string += author;
+    string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
+async function fetchFuturama() {
+  const response = await fetch("https://futurama-api.fly.dev/api/quotes/1");
+  var image1;
+  if (response.ok) {
+    const data = await response.json();
+    let quote = data[0].quote;
+    let author = data[0].character;
+    let image = data[0].image;
+    const regex = /(.+)((c_scale,)(w_[0-9]{2,3}))(.+)/g;
+    if (image.includes("fetch")) {
+      if (regex.test(image)) {
+        const subst = `$1$3h_200$5`;
+        image1 = image.replace(regex, subst);
+      }
+    } else {
+      image1 = "https://res.cloudinary.com/dzxqhkyqd/image/fetch/c_scale,h_200/"+image;
+    }
+
+    let string = "> ";
+    string += quote;
+    string += "\n\n";
+    string += "![](" + image1 + ")";
+    string += "\n\n[[";
     string += author;
     string += "]]";
     return (string);
