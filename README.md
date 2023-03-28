@@ -1,5 +1,6 @@
 **New:**
-- import a quote from Futurama from https://futurama-api.fly.dev/
+- import a quote from Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
+- import a quote from Futurama from futurama-api.fly.dev
 - import a quote from your own collection within your graph. Simply set the page title where you store your quotes in the settings in Roam Depot.
   - quotes are pulled from the first child blocks, and the author/speaker from the first child of the quote block (shown below)
 
@@ -40,6 +41,8 @@ Quotes on Design can be triggered from the Command Palette command Random Quote 
 The API Ninja quotes API requires a free account at https://api-ninjas.com/api/quotes. You then need to add your API key in the Roam Depot Settings. You can optionally select from a dropdown menu with a series of quotation categories or leave as "None" for a purely random quote. The API Ninjas Quotes API can be triggered from the Command Palette command Random Quote from API Ninjas or via the SmartBlock command <%NINJAQUOTE%>.
 
 Futurama quotes can be triggered from the Command Palette command Random Quote from Futurama or via the SmartBlock command <%FUTURAMAQUOTE%>.
+
+Monty Python's Flying Circus quotes can be triggered from the Command Palette command Random Quote from Monty Python's Flying Circus or via the SmartBlock command <%PYTHONQUOTE%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
