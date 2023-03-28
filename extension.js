@@ -271,6 +271,26 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Joke from JokeAPI",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchJokeAPI(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -335,7 +355,12 @@ export default {
       help: "Import a Random Quote from Monty Python's Flying Circus",
       handler: (context) => fetchMPFC,
     };
-
+    const args12 = {
+      text: "JOKEAPI",
+      help: "Import a Random Quote from JokeAPI",
+      handler: (context) => fetchJokeAPI,
+    };
+    
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
       window.roamjs.extension.smartblocks.registerCommand(args1);
@@ -349,6 +374,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args9);
       window.roamjs.extension.smartblocks.registerCommand(args10);
       window.roamjs.extension.smartblocks.registerCommand(args11);
+      window.roamjs.extension.smartblocks.registerCommand(args12);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -365,7 +391,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args8) &&
           window.roamjs.extension.smartblocks.registerCommand(args9) &&
           window.roamjs.extension.smartblocks.registerCommand(args10) &&
-          window.roamjs.extension.smartblocks.registerCommand(args11)
+          window.roamjs.extension.smartblocks.registerCommand(args11) &&
+          window.roamjs.extension.smartblocks.registerCommand(args12)
       );
     }
 
@@ -696,6 +723,31 @@ async function fetchMPFC() {
         string += ")";
       }
     }
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
+async function fetchJokeAPI() {
+  var setup, delivery, joke;
+  const response = await fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&safe-mode");
+  
+  if (response.ok) {
+    const data = await response.json();
+    console.info(data);
+    let string = "> ";
+    if (data.type == "twopart") {
+      setup = data.setup;
+      delivery = data.delivery;
+      string += setup;
+      string += "\n\n";
+      string += delivery;
+    } else {
+      joke = strip(data.joke);
+      string += joke;
+    }
+
     return (string);
   } else {
     console.error(data);
