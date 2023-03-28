@@ -1,4 +1,5 @@
 **New:**
+- import a joke from JokeAPI
 - import a quote from Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
 - import a quote from Futurama from futurama-api.fly.dev
 - import a quote from your own collection within your graph. Simply set the page title where you store your quotes in the settings in Roam Depot.
@@ -43,6 +44,8 @@ The API Ninja quotes API requires a free account at https://api-ninjas.com/api/q
 Futurama quotes can be triggered from the Command Palette command Random Quote from Futurama or via the SmartBlock command <%FUTURAMAQUOTE%>.
 
 Monty Python's Flying Circus quotes can be triggered from the Command Palette command Random Quote from Monty Python's Flying Circus or via the SmartBlock command <%PYTHONQUOTE%>.
+
+Jokes from JokeAPI can be imported using the Command Palette command Random Joke from JokeAPI or via the SmartBlock command <%JOKEAPI%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
