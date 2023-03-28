@@ -251,6 +251,26 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Quote from Monty Python's Flying Circus",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchMPFC(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -310,6 +330,11 @@ export default {
       help: "Import a Random Quote from Futurama",
       handler: (context) => fetchFuturama,
     };
+    const args11 = {
+      text: "PYTHONQUOTE",
+      help: "Import a Random Quote from Monty Python's Flying Circus",
+      handler: (context) => fetchMPFC,
+    };
 
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -323,6 +348,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args8);
       window.roamjs.extension.smartblocks.registerCommand(args9);
       window.roamjs.extension.smartblocks.registerCommand(args10);
+      window.roamjs.extension.smartblocks.registerCommand(args11);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -338,7 +364,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
           window.roamjs.extension.smartblocks.registerCommand(args8) &&
           window.roamjs.extension.smartblocks.registerCommand(args9) &&
-          window.roamjs.extension.smartblocks.registerCommand(args10)
+          window.roamjs.extension.smartblocks.registerCommand(args10) &&
+          window.roamjs.extension.smartblocks.registerCommand(args11)
       );
     }
 
@@ -619,7 +646,7 @@ async function fetchFuturama() {
         image1 = image.replace(regex, subst);
       }
     } else {
-      image1 = "https://res.cloudinary.com/dzxqhkyqd/image/fetch/c_scale,h_200/"+image;
+      image1 = "https://res.cloudinary.com/dzxqhkyqd/image/fetch/c_scale,h_200/" + image;
     }
 
     let string = "> ";
@@ -629,6 +656,46 @@ async function fetchFuturama() {
     string += "\n\n[[";
     string += author;
     string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
+async function fetchMPFC() {
+  const response = await fetch("https://monty-pythons-flying-api.fly.dev/v1/quotes/random");
+
+  if (response.ok) {
+    const data = await response.json();
+    let quote = data.quote;
+    let character = data.character;
+    let actor = data.actor;
+    let episode = data.episode;
+    let sketch = data.sketch;
+    
+    let string = "> ";
+    string += quote;
+    string += "\n\n[[";
+    string += character;
+    string += "]]";
+    if (actor != null) {
+      string += " ([["; 
+      string += actor;
+      string += "]])";
+    }
+    if (sketch != null || episode != null) {
+      string += " in";
+      if (sketch != null) {
+        string += " [[";
+        string += sketch;
+        string += "]]";
+      }
+      if (episode != null) {
+        string += " (Ep. ";
+        string += episode;
+        string += ")";
+      }
+    }
     return (string);
   } else {
     console.error(data);
