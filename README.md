@@ -1,4 +1,5 @@
 **New:**
+- import a random Inspirational Quote
 - import a random Movie Quote
 - import a joke from JokeAPI
 - import a quote from Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
@@ -49,6 +50,8 @@ Monty Python's Flying Circus quotes can be triggered from the Command Palette co
 Jokes from JokeAPI can be imported using the Command Palette command Random Joke from JokeAPI or via the SmartBlock command <%JOKEAPI%>.
 
 Movie Quotes can be imported using the Command Palette command Random Movie Quote or via the SmartBlock command <%MOVIEQUOTE%>.
+
+Inspirational Quotes can be imported using the Command Palette command Random Inspirational Quote or via the SmartBlock command <%INSPQUOTE%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
