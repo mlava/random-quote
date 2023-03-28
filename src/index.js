@@ -1,4 +1,5 @@
 const movieQuote = require("popular-movie-quotes");
+const { getAll, getRandom } = require('@divyanshu013/inspirational-quotes');
 
 export default {
   onload: ({ extensionAPI }) => {
@@ -313,6 +314,26 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Inspirational Quote",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchInspQuote(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -387,6 +408,11 @@ export default {
       help: "Import a Random Movie Quote",
       handler: (context) => fetchMovieQuote,
     };
+    const args14 = {
+      text: "INSPQUOTE",
+      help: "Import a Random Inspirational Quote",
+      handler: (context) => fetchInspQuote,
+    };
 
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
@@ -403,6 +429,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args11);
       window.roamjs.extension.smartblocks.registerCommand(args12);
       window.roamjs.extension.smartblocks.registerCommand(args13);
+      window.roamjs.extension.smartblocks.registerCommand(args14);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -421,7 +448,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args10) &&
           window.roamjs.extension.smartblocks.registerCommand(args11) &&
           window.roamjs.extension.smartblocks.registerCommand(args12) &&
-          window.roamjs.extension.smartblocks.registerCommand(args13)
+          window.roamjs.extension.smartblocks.registerCommand(args13) &&
+          window.roamjs.extension.smartblocks.registerCommand(args14)
       );
     }
 
@@ -574,6 +602,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("PYTHONQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("JOKEAPI");
       window.roamjs.extension.smartblocks.unregisterCommand("MOVIEQUOTE");
+      window.roamjs.extension.smartblocks.unregisterCommand("INSPQUOTE");
     }
   }
 }
@@ -794,6 +823,19 @@ async function fetchMovieQuote() {
   string += "\n\n";
   string += "[["+data[0].movie+"]] ("+data[0].year+")";
 
+  return (string);
+}
+
+async function fetchInspQuote() {
+  let data = getRandom();
+
+  let string = "> ";
+  string += data.quote;
+  string += "\n\n";
+  string += "[["+data.author+"]]";
+  if (data.hasOwnProperty("source")) {
+    string += " ("+data.source+")";
+  }
   return (string);
 }
 
