@@ -20,6 +20,10 @@ Import a random quote from the collections at
 - Quotes on Design quotesondesign.com
 - API Ninja Quotes api-ninjas.com/api/quotes
 - Futurama quote from futurama-api.fly.dev
+- Jokes from JokeAPI
+- Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
+- movie quotes from npmjs.com/package/popular-movie-quotes
+- inspirational quotes from npmjs.com/package/@divyanshu013/inspirational-quotes
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
