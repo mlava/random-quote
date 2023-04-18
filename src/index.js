@@ -334,6 +334,46 @@ export default {
           }))
       }
     });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Ted Lasso Quote",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchLassoQuote(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
+    extensionAPI.ui.commandPalette.addCommand({
+      label: "Random Shakespeare Quote",
+      callback: () => {
+        const uid = window.roamAlphaAPI.ui.getFocusedBlock()?.["block-uid"];
+        if (uid == undefined) {
+          alert("Please focus a block before importing a quote");
+          return;
+        } else {
+          window.roamAlphaAPI.updateBlock(
+            { block: { uid: uid, string: "Loading...".toString(), open: true } });
+        }
+        fetchShakespeareQuote(uid).then(string =>
+          window.roamAlphaAPI.updateBlock({
+            block: {
+              uid: uid,
+              string: string,
+            }
+          }))
+      }
+    });
 
     const args = {
       text: "RANDOMQUOTE",
@@ -413,7 +453,17 @@ export default {
       help: "Import a Random Inspirational Quote",
       handler: (context) => fetchInspQuote,
     };
-
+    const args15 = {
+      text: "LASSOQUOTE",
+      help: "Import a Random Ted Lasso Quote",
+      handler: (context) => fetchLassoQuote,
+    };
+    const args16 = {
+      text: "SHAKESPEAREQUOTE",
+      help: "Import a Random Shakespeare Quote",
+      handler: (context) => fetchShakespeareQuote,
+    };
+    
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
       window.roamjs.extension.smartblocks.registerCommand(args1);
@@ -430,6 +480,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args12);
       window.roamjs.extension.smartblocks.registerCommand(args13);
       window.roamjs.extension.smartblocks.registerCommand(args14);
+      window.roamjs.extension.smartblocks.registerCommand(args15);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -449,7 +500,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args11) &&
           window.roamjs.extension.smartblocks.registerCommand(args12) &&
           window.roamjs.extension.smartblocks.registerCommand(args13) &&
-          window.roamjs.extension.smartblocks.registerCommand(args14)
+          window.roamjs.extension.smartblocks.registerCommand(args14) &&
+          window.roamjs.extension.smartblocks.registerCommand(args15)
       );
     }
 
@@ -603,6 +655,7 @@ export default {
       window.roamjs.extension.smartblocks.unregisterCommand("JOKEAPI");
       window.roamjs.extension.smartblocks.unregisterCommand("MOVIEQUOTE");
       window.roamjs.extension.smartblocks.unregisterCommand("INSPQUOTE");
+      window.roamjs.extension.smartblocks.unregisterCommand("LASSOQUOTE");
     }
   }
 }
@@ -837,6 +890,50 @@ async function fetchInspQuote() {
     string += " ("+data.source+")";
   }
   return (string);
+}
+
+async function fetchLassoQuote() {
+  const response = await fetch("https://tedlassoquotes.com/v1/quote");
+  if (response.ok) {
+    const data = await response.json();
+    let quote = data.quote;
+    let author = data.author;
+    let string = "> ";
+    string += quote;
+    string += " \n[[";
+    string += author;
+    string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
+}
+
+async function fetchShakespeareQuote() {
+  const response = await fetch("https://shakespeare-quote.glitch.me/");
+  if (response.ok) {
+    const data = await response.json();
+    var author;
+    let quote = data.quote;
+    let play = data.play;
+    const regex = /^([A-Z]{2,}\s?[A-Z]{2,})(( , aside)|( , as [a-zA-Z]{3,}))?/gm;
+    author = quote.match(regex);
+    quote = quote.replace(regex, "");
+    const regex1 = /^\s{0,}\\n/;
+    if (regex1.test(quote)) {
+      quote = quote.replace(regex, "");
+    }
+    let string = "> ";
+    string += quote.trim();
+    string += " \n[[";
+    string += author;
+    string += "]] in [[";
+    string += play;
+    string += "]]";
+    return (string);
+  } else {
+    console.error(data);
+  }
 }
 
 function sendConfigAlert(key) {
