@@ -1,4 +1,6 @@
 **New:**
+- import a random Ted Lasso Quote
+- import a random Shakespeare Quote
 - import a random Inspirational Quote
 - import a random Movie Quote
 - import a joke from JokeAPI
@@ -24,6 +26,8 @@ Import a random quote from the collections at
 - Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
 - movie quotes from npmjs.com/package/popular-movie-quotes
 - inspirational quotes from npmjs.com/package/@divyanshu013/inspirational-quotes
+- Ted Lasso quotes at https://tedlassoquotes.com/v1/quote
+- Shakespeare quotes at https://shakespeare-quote.glitch.me/
 
 The extension formats the quote as a blockquote with a link to the name of the author.
 
@@ -56,6 +60,10 @@ Jokes from JokeAPI can be imported using the Command Palette command Random Joke
 Movie Quotes can be imported using the Command Palette command Random Movie Quote or via the SmartBlock command <%MOVIEQUOTE%>.
 
 Inspirational Quotes can be imported using the Command Palette command Random Inspirational Quote or via the SmartBlock command <%INSPQUOTE%>.
+
+Ted Lasso Quotes can be imported using the Command Palette command Random Ted Lasso Quote or via the SmartBlock command <%LASSOQUOTE%>.
+
+Shakespeare Quotes can be imported using the Command Palette command Random Shakespeare Quote or via the SmartBlock command <%SHAKESPEAREQUOTE%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
