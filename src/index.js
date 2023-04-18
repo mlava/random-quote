@@ -481,6 +481,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args13);
       window.roamjs.extension.smartblocks.registerCommand(args14);
       window.roamjs.extension.smartblocks.registerCommand(args15);
+      window.roamjs.extension.smartblocks.registerCommand(args16);
     } else {
       document.body.addEventListener(
         `roamjs:smartblocks:loaded`,
@@ -501,7 +502,8 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args12) &&
           window.roamjs.extension.smartblocks.registerCommand(args13) &&
           window.roamjs.extension.smartblocks.registerCommand(args14) &&
-          window.roamjs.extension.smartblocks.registerCommand(args15)
+          window.roamjs.extension.smartblocks.registerCommand(args15) &&
+          window.roamjs.extension.smartblocks.registerCommand(args16)
       );
     }
 
