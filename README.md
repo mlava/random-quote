@@ -1,5 +1,4 @@
 **New:**
-- import a random Ted Lasso Quote
 - import a random Shakespeare Quote
 - import a random Inspirational Quote
 - import a random Movie Quote
@@ -21,12 +20,10 @@ Import a random quote from the collections at
 - Dad jokes from icanhazdadjoke.com
 - Quotes on Design quotesondesign.com
 - API Ninja Quotes api-ninjas.com/api/quotes
-- Futurama quote from futurama-api.fly.dev
 - Jokes from JokeAPI
 - Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
 - movie quotes from npmjs.com/package/popular-movie-quotes
 - inspirational quotes from npmjs.com/package/@divyanshu013/inspirational-quotes
-- Ted Lasso quotes at https://tedlassoquotes.com/v1/quote
 - Shakespeare quotes at https://shakespeare-quote.glitch.me/
 
 The extension formats the quote as a blockquote with a link to the name of the author.
@@ -51,8 +48,6 @@ Quotes on Design can be triggered from the Command Palette command Random Quote 
 
 The API Ninja quotes API requires a free account at https://api-ninjas.com/api/quotes. You then need to add your API key in the Roam Depot Settings. You can optionally select from a dropdown menu with a series of quotation categories or leave as "None" for a purely random quote. The API Ninjas Quotes API can be triggered from the Command Palette command Random Quote from API Ninjas or via the SmartBlock command <%NINJAQUOTE%>.
 
-Futurama quotes can be triggered from the Command Palette command Random Quote from Futurama or via the SmartBlock command <%FUTURAMAQUOTE%>.
-
 Monty Python's Flying Circus quotes can be triggered from the Command Palette command Random Quote from Monty Python's Flying Circus or via the SmartBlock command <%PYTHONQUOTE%>.
 
 Jokes from JokeAPI can be imported using the Command Palette command Random Joke from JokeAPI or via the SmartBlock command <%JOKEAPI%>.
@@ -61,10 +56,10 @@ Movie Quotes can be imported using the Command Palette command Random Movie Quot
 
 Inspirational Quotes can be imported using the Command Palette command Random Inspirational Quote or via the SmartBlock command <%INSPQUOTE%>.
 
-Ted Lasso Quotes can be imported using the Command Palette command Random Ted Lasso Quote or via the SmartBlock command <%LASSOQUOTE%>.
-
 Shakespeare Quotes can be imported using the Command Palette command Random Shakespeare Quote or via the SmartBlock command <%SHAKESPEAREQUOTE%>.
 
 **Note:**
 - Quote Garden API is no longer available and this source has therefore been removed
 - Tolkien Quotes API is also no longer available, and has been replaced by The One API instead
+- Futurama Quotes are no longer available and this source has therefore been removed
+- Ted Lasso Quotes are no longer available this source has therefore been removed 
