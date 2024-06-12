@@ -234,6 +234,7 @@ export default {
           }))
       }
     });
+    /*
     extensionAPI.ui.commandPalette.addCommand({
       label: "Random Quote from Futurama",
       callback: () => {
@@ -254,6 +255,7 @@ export default {
           }))
       }
     });
+    */
     extensionAPI.ui.commandPalette.addCommand({
       label: "Random Quote from Monty Python's Flying Circus",
       callback: () => {
@@ -334,6 +336,7 @@ export default {
           }))
       }
     });
+    /*
     extensionAPI.ui.commandPalette.addCommand({
       label: "Random Ted Lasso Quote",
       callback: () => {
@@ -354,6 +357,7 @@ export default {
           }))
       }
     });
+    */
     extensionAPI.ui.commandPalette.addCommand({
       label: "Random Shakespeare Quote",
       callback: () => {
@@ -428,11 +432,13 @@ export default {
       help: "Import a Random Quote from your graph",
       handler: (context) => fetchRandomLocalQuote,
     };
+    /*
     const args10 = {
       text: "FUTURAMAQUOTE",
       help: "Import a Random Quote from Futurama",
       handler: (context) => fetchFuturama,
     };
+    */
     const args11 = {
       text: "PYTHONQUOTE",
       help: "Import a Random Quote from Monty Python's Flying Circus",
@@ -453,11 +459,13 @@ export default {
       help: "Import a Random Inspirational Quote",
       handler: (context) => fetchInspQuote,
     };
+    /*
     const args15 = {
       text: "LASSOQUOTE",
       help: "Import a Random Ted Lasso Quote",
       handler: (context) => fetchLassoQuote,
     };
+    */
     const args16 = {
       text: "SHAKESPEAREQUOTE",
       help: "Import a Random Shakespeare Quote",
@@ -475,12 +483,12 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args7);
       window.roamjs.extension.smartblocks.registerCommand(args8);
       window.roamjs.extension.smartblocks.registerCommand(args9);
-      window.roamjs.extension.smartblocks.registerCommand(args10);
+      //window.roamjs.extension.smartblocks.registerCommand(args10);
       window.roamjs.extension.smartblocks.registerCommand(args11);
       window.roamjs.extension.smartblocks.registerCommand(args12);
       window.roamjs.extension.smartblocks.registerCommand(args13);
       window.roamjs.extension.smartblocks.registerCommand(args14);
-      window.roamjs.extension.smartblocks.registerCommand(args15);
+      //window.roamjs.extension.smartblocks.registerCommand(args15);
       window.roamjs.extension.smartblocks.registerCommand(args16);
     } else {
       document.body.addEventListener(
@@ -497,12 +505,12 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
           window.roamjs.extension.smartblocks.registerCommand(args8) &&
           window.roamjs.extension.smartblocks.registerCommand(args9) &&
-          window.roamjs.extension.smartblocks.registerCommand(args10) &&
+          //window.roamjs.extension.smartblocks.registerCommand(args10) &&
           window.roamjs.extension.smartblocks.registerCommand(args11) &&
           window.roamjs.extension.smartblocks.registerCommand(args12) &&
           window.roamjs.extension.smartblocks.registerCommand(args13) &&
           window.roamjs.extension.smartblocks.registerCommand(args14) &&
-          window.roamjs.extension.smartblocks.registerCommand(args15) &&
+          //window.roamjs.extension.smartblocks.registerCommand(args15) &&
           window.roamjs.extension.smartblocks.registerCommand(args16)
       );
     }
