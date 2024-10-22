@@ -671,13 +671,14 @@ export default {
 }
 
 async function fetchRandomQuote() {
-  const response = await fetch("https://api.quotable.io/random");
+  const response = await fetch("https://api.quotable.io/quotes/random");
   const data = await response.json();
+  console.info(response, data);
   if (response.ok) {
     let string = "> ";
-    string += data.content;
+    string += data[0].content;
     string += " \n\n[[";
-    string += data.author;
+    string += data[0].author;
     string += "]]";
     return (string);
   } else {
