@@ -404,11 +404,13 @@ export default {
       help: "Import a Game of Thrones quote",
       handler: (context) => fetchGOTQuote,
     };
+    /*
     const args5 = {
       text: "ANIMEQUOTE",
       help: "Import a quote from Animechan",
       handler: (context) => fetchAnimeQuote,
     };
+    */
     const args6 = {
       text: "DADJOKE",
       help: "Import a random Dad joke",
@@ -478,7 +480,7 @@ export default {
       window.roamjs.extension.smartblocks.registerCommand(args2);
       window.roamjs.extension.smartblocks.registerCommand(args3);
       window.roamjs.extension.smartblocks.registerCommand(args4);
-      window.roamjs.extension.smartblocks.registerCommand(args5);
+      //window.roamjs.extension.smartblocks.registerCommand(args5);
       window.roamjs.extension.smartblocks.registerCommand(args6);
       window.roamjs.extension.smartblocks.registerCommand(args7);
       window.roamjs.extension.smartblocks.registerCommand(args8);
@@ -500,7 +502,7 @@ export default {
           window.roamjs.extension.smartblocks.registerCommand(args2) &&
           window.roamjs.extension.smartblocks.registerCommand(args3) &&
           window.roamjs.extension.smartblocks.registerCommand(args4) &&
-          window.roamjs.extension.smartblocks.registerCommand(args5) &&
+          //window.roamjs.extension.smartblocks.registerCommand(args5) &&
           window.roamjs.extension.smartblocks.registerCommand(args6) &&
           window.roamjs.extension.smartblocks.registerCommand(args7) &&
           window.roamjs.extension.smartblocks.registerCommand(args8) &&
