@@ -134,6 +134,7 @@ export default {
           }))
       }
     });
+    /*
     extensionAPI.ui.commandPalette.addCommand({
       label: "Animechan Quote",
       callback: () => {
@@ -154,6 +155,7 @@ export default {
           }))
       }
     });
+    */
     extensionAPI.ui.commandPalette.addCommand({
       label: "Random Dad Joke",
       callback: () => {
