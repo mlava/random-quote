@@ -1,4 +1,5 @@
 **New:**
+- fixed import from Quotable
 - import a random Shakespeare Quote
 - import a random Inspirational Quote
 - import a random Movie Quote
