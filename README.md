@@ -63,4 +63,5 @@ Shakespeare Quotes can be imported using the Command Palette command Random Shak
 - Quote Garden API is no longer available and this source has therefore been removed
 - Tolkien Quotes API is also no longer available, and has been replaced by The One API instead
 - Futurama Quotes are no longer available and this source has therefore been removed
-- Ted Lasso Quotes are no longer available this source has therefore been removed 
+- Ted Lasso Quotes are no longer available this source has therefore been removed
+- Anime Chan Quotes are no longer available this source has therefore been removed 
