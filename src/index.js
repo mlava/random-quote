@@ -471,7 +471,7 @@ export default {
       help: "Import a Random Shakespeare Quote",
       handler: (context) => fetchShakespeareQuote,
     };
-    
+
     if (window.roamjs?.extension?.smartblocks) {
       window.roamjs.extension.smartblocks.registerCommand(args);
       window.roamjs.extension.smartblocks.registerCommand(args1);
@@ -671,19 +671,19 @@ export default {
 }
 
 async function fetchRandomQuote() {
-  const response = await fetch("https://api.quotable.io/quotes/random");
+  const response = await fetch("https://florinbobis-quotes-net.hf.space/quotes/random?dataset=quotable"); // original quotable api is down
   const data = await response.json();
-  console.info(response, data);
   if (response.ok) {
     let string = "> ";
-    string += data[0].content;
+    string += data.quoteText;
     string += " \n\n[[";
-    string += data[0].author;
+    string += data.author;
     string += "]]";
     return (string);
   } else {
     console.error(data);
   }
+  
 };
 
 async function fetchStoicQuote() {
@@ -885,7 +885,7 @@ async function fetchMovieQuote() {
   let string = "> ";
   string += data[0].quote;
   string += "\n\n";
-  string += "[["+data[0].movie+"]] ("+data[0].year+")";
+  string += "[[" + data[0].movie + "]] (" + data[0].year + ")";
 
   return (string);
 }
@@ -896,9 +896,9 @@ async function fetchInspQuote() {
   let string = "> ";
   string += data.quote;
   string += "\n\n";
-  string += "[["+data.author+"]]";
+  string += "[[" + data.author + "]]";
   if (data.hasOwnProperty("source")) {
-    string += " ("+data.source+")";
+    string += " (" + data.source + ")";
   }
   return (string);
 }
