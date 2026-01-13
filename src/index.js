@@ -4,7 +4,6 @@ import iziToast from "izitoast";
 
 let smartblockCommandTexts = [];
 let quotesDbCache = null;
-let tvQuotesCache = null;
 
 export default {
   onload: ({ extensionAPI }) => {

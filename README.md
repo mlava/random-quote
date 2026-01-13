@@ -77,11 +77,12 @@ These are ideal for daily notes, journaling, or writing prompts.
 ## 📚 Quote Sources (Current)
 
 ### Built‑in & Dataset Sources
-- **Large Quotes Dataset** (5,000+ curated quotes, SmartBlock: `<%RANDOMQUOTE%>`)
+- **Large Quotes Dataset** (5,000+ curated quotes, SmartBlock: `<%QUOTESDATASET%>`)
 - **Your Local Quotes Page** (stored inside your own graph, SmartBlock: `<%LOCALQUOTE%>`)
 - **Quotes by Tag** (pull quotes from tagged blocks, SmartBlock: `<%LOCALQUOTETAG%>`)
 
 ### API‑Based (Stable / Actively Maintained)
+- **Random Quote** (Quotable dataset mirror, SmartBlock: `<%RANDOMQUOTE%>`)
 - **ZenQuotes**
   - Daily Inspiration (SmartBlock: `<%ZENDAILY%>`)
   - Random Quotes (SmartBlock: `<%ZENRANDOM%>`)
@@ -90,6 +91,9 @@ These are ideal for daily notes, journaling, or writing prompts.
 - **Stoic Quotes** (SmartBlock: `<%STOICQUOTE%>`)
 - **Lord of the Rings Quotes** (The One API – requires free API key, SmartBlock: `<%TOLKIENQUOTE%>`)
 - **Game of Thrones Quotes** (SmartBlock: `<%GOTQUOTE%>`)
+- **Ron Swanson Quotes** (SmartBlock: `<%SWANSONQUOTE%>`)
+- **Monty Python's Flying Circus Quotes** (SmartBlock: `<%PYTHONQUOTE%>`)
+- **Shakespeare Quotes** (SmartBlock: `<%SHAKESPEAREQUOTE%>`)
 - **Movie Quotes** (popular‑movie‑quotes npm package, SmartBlock: `<%MOVIEQUOTE%>`)
 - **Inspirational Quotes** (curated npm package, SmartBlock: `<%INSPQUOTE%>`)
 
@@ -101,6 +105,7 @@ These are ideal for daily notes, journaling, or writing prompts.
 - **JokeAPI** (safe‑mode + blacklist enabled, SmartBlock: `<%JOKEAPI%>`)
 - **Dad Jokes** (icanhazdadjoke.com, SmartBlock: `<%DADJOKE%>`)
 - **API Ninjas Jokes** (SmartBlock: `<%NINJAJOKE%>`)
+- **Programming Jokes** (API Ninjas, SmartBlock: `<%PROGRAMMINGJOKE%>`)
 
 All joke providers are filtered to avoid NSFW content.
 
