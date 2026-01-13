@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@divyanshu013/inspirational-quotes": "^1.0.7",
+    "izitoast": "^1.4.0",
     "popular-movie-quotes": "^1.2.4"
   }
 }

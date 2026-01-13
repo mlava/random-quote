@@ -1,67 +1,176 @@
-**New:**
-- fixed import from Quotable
-- import a random Shakespeare Quote
-- import a random Inspirational Quote
-- import a random Movie Quote
-- import a joke from JokeAPI
-- import a quote from Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
-- import a quote from Futurama from futurama-api.fly.dev
-- import a quote from your own collection within your graph. Simply set the page title where you store your quotes in the settings in Roam Depot.
-  - quotes are pulled from the first child blocks, and the author/speaker from the first child of the quote block (shown below)
+# Random Quotes for Roam Research
 
-![image](https://user-images.githubusercontent.com/6857790/223036619-e0237ff0-bf4a-4d4a-a8b3-8b7894aa92df.png)
+Random Quotes lets you quickly insert **high‑quality quotes and jokes** into your Roam graph using the **Command Palette** or **SmartBlocks**.
 
-Import a random quote from the collections at 
-- quotable.io 
-- stoic-quotes.com
-- Ron Swanson quotes
-- The One API - Lord of the Rings quotes
-- Game of Thrones quotes
-- anime quotes from Animechan
-- Dad jokes from icanhazdadjoke.com
-- Quotes on Design quotesondesign.com
-- API Ninja Quotes api-ninjas.com/api/quotes
-- Jokes from JokeAPI
-- Monty Python's Flying Circus from monty-pythons-flying-api.fly.dev
-- movie quotes from npmjs.com/package/popular-movie-quotes
-- inspirational quotes from npmjs.com/package/@divyanshu013/inspirational-quotes
-- Shakespeare quotes at https://shakespeare-quote.glitch.me/
+Quotes are formatted as Roam blockquotes and automatically attributed to their author, speaker, or source.
 
-The extension formats the quote as a blockquote with a link to the name of the author.
+The extension prioritizes **reliable sources** (large static datasets and reputable APIs) and avoids fragile or abandoned quote APIs.
 
-![image](https://user-images.githubusercontent.com/6857790/181698189-dff64a9b-a445-41fc-a10c-9283a35f7ce7.png)
+---
 
-Random Quotes from Quotable can be triggered from the Command Palette command Random Quote or via the SmartBlock command <%RANDOMQUOTE%>.
+## ✨ What’s New (Major Updates)
 
-Stoicism Quotes from stoic-quotes.com can be triggered from the Command Palette command Stoic Quote or via the SmartBlock command <%STOICQUOTE%>.
+- **Surprise Quote** – pull a random quote from multiple providers with automatic fallback  
+- **Surprise Joke** – same idea, but for jokes  
+- **Dataset‑based quotes** (5,000+ quotes, cached locally for speed & reliability)  
+- **ZenQuotes** (daily inspiration + random quotes, via Roam CORS proxy)  
+- **API Ninjas quotes** with optional category filtering  
+- **Local quotes from your own graph**  
+- Improved error handling and fallback logic  
+- Dead / unstable APIs fully removed  
 
-Ron Swanson quotes can be triggered from the Command Palette command Ron Swanson Quote or via the SmartBlock command <%SWANSONQUOTE%>.
+---
 
-Lord of the Rings quotes can be triggered from the Command Palette command Tolkien Quote or via the SmartBlock command <%TOLKIENQUOTE%>. This requires a free API key from https://the-one-api.dev/account.
+## 📌 How Quotes Are Inserted
 
-Game of Thrones quotes can be triggered from the Command Palette command Game of Thrones Quote or via the SmartBlock command <%GOTQUOTE%>.
+All quotes are inserted as a blockquote, followed by the author/speaker as a Roam page link:
 
-Animechan quotes can be triggered from the Command Palette command Animechan Quote or via the SmartBlock command <%ANIMEQUOTE%>.
+```
+> The only way to do great work is to love what you do.
 
-Dad Jokes can be triggered from the Command Palette command Random Dad Joke or via the SmartBlock command <%DADJOKE%>.
+[[Steve Jobs]]
+```
 
-Quotes on Design can be triggered from the Command Palette command Random Quote from Quotes on Design or via the SmartBlock command <%QUOTESONDESIGN%>.
+Some sources may also include a **work, show, or film** where relevant.
 
-The API Ninja quotes API requires a free account at https://api-ninjas.com/api/quotes. You then need to add your API key in the Roam Depot Settings. You can optionally select from a dropdown menu with a series of quotation categories or leave as "None" for a purely random quote. The API Ninjas Quotes API can be triggered from the Command Palette command Random Quote from API Ninjas or via the SmartBlock command <%NINJAQUOTE%>.
+---
 
-Monty Python's Flying Circus quotes can be triggered from the Command Palette command Random Quote from Monty Python's Flying Circus or via the SmartBlock command <%PYTHONQUOTE%>.
+## 🎯 Ways to Trigger Quotes
 
-Jokes from JokeAPI can be imported using the Command Palette command Random Joke from JokeAPI or via the SmartBlock command <%JOKEAPI%>.
+### Command Palette
+Open the Command Palette and select a quote or joke source.
 
-Movie Quotes can be imported using the Command Palette command Random Movie Quote or via the SmartBlock command <%MOVIEQUOTE%>.
+### SmartBlocks
+Each source also has a SmartBlock command:
 
-Inspirational Quotes can be imported using the Command Palette command Random Inspirational Quote or via the SmartBlock command <%INSPQUOTE%>.
+```
+<%RANDOMQUOTE%>
+<%STOICQUOTE%>
+<%SURPRISEQUOTE%>
+<%SURPRISEJOKE%>
+```
 
-Shakespeare Quotes can be imported using the Command Palette command Random Shakespeare Quote or via the SmartBlock command <%SHAKESPEAREQUOTE%>.
+---
 
-**Note:**
-- Quote Garden API is no longer available and this source has therefore been removed
-- Tolkien Quotes API is also no longer available, and has been replaced by The One API instead
-- Futurama Quotes are no longer available and this source has therefore been removed
-- Ted Lasso Quotes are no longer available this source has therefore been removed
-- Anime Chan Quotes are no longer available this source has therefore been removed 
+## 🔀 Surprise Commands (Recommended)
+
+### Surprise Quote
+Picks a quote from multiple providers, automatically skipping failed or unavailable sources.
+
+```
+Command Palette: Surprise Me (Quote)
+SmartBlock: <%SURPRISEQUOTE%>
+```
+
+### Surprise Joke
+Same idea, but for jokes.
+
+```
+Command Palette: Surprise Me (Joke)
+SmartBlock: <%SURPRISEJOKE%>
+```
+
+These are ideal for daily notes, journaling, or writing prompts.
+
+---
+
+## 📚 Quote Sources (Current)
+
+### Built‑in & Dataset Sources
+- **Large Quotes Dataset** (5,000+ curated quotes, SmartBlock: `<%RANDOMQUOTE%>`)
+- **Your Local Quotes Page** (stored inside your own graph, SmartBlock: `<%LOCALQUOTE%>`)
+- **Quotes by Tag** (pull quotes from tagged blocks, SmartBlock: `<%LOCALQUOTETAG%>`)
+
+### API‑Based (Stable / Actively Maintained)
+- **ZenQuotes**
+  - Daily Inspiration (SmartBlock: `<%ZENDAILY%>`)
+  - Random Quotes (SmartBlock: `<%ZENRANDOM%>`)
+- **API Ninjas Quotes** (SmartBlock: `<%NINJAQUOTE%>`)
+  - Optional category filtering (wisdom, philosophy, life, etc.)
+- **Stoic Quotes** (SmartBlock: `<%STOICQUOTE%>`)
+- **Lord of the Rings Quotes** (The One API – requires free API key, SmartBlock: `<%TOLKIENQUOTE%>`)
+- **Game of Thrones Quotes** (SmartBlock: `<%GOTQUOTE%>`)
+- **Movie Quotes** (popular‑movie‑quotes npm package, SmartBlock: `<%MOVIEQUOTE%>`)
+- **Inspirational Quotes** (curated npm package, SmartBlock: `<%INSPQUOTE%>`)
+
+---
+
+## 😂 Joke Sources (Current)
+
+- **Official Joke API** (SmartBlock: `<%OFFICIALJOKE%>`)
+- **JokeAPI** (safe‑mode + blacklist enabled, SmartBlock: `<%JOKEAPI%>`)
+- **Dad Jokes** (icanhazdadjoke.com, SmartBlock: `<%DADJOKE%>`)
+- **API Ninjas Jokes** (SmartBlock: `<%NINJAJOKE%>`)
+
+All joke providers are filtered to avoid NSFW content.
+
+---
+
+## 🧠 Using Your Own Quotes (Highly Recommended)
+
+You can store quotes directly in your graph and pull from them randomly.
+
+### Setup
+1. Create a page (e.g. `Quotes`)
+2. Each quote should be a top‑level block
+3. Put the author/speaker as the **first child** of the quote block
+
+Example:
+
+```
+- Stay hungry. Stay foolish.
+  - Steve Jobs
+```
+
+Set the page title in **Roam Depot → Random Quotes settings**.
+
+You can also pull quotes **by tag** (e.g. `#quote`, `#wisdom`).
+
+---
+
+## ⚙️ Configuration Options
+
+Available in **Roam Depot → Random Quotes**:
+
+- Local Quotes page title  
+- Local Quotes tag  
+- The One API key (Lord of the Rings quotes)  
+- API Ninjas key  
+- Optional API Ninjas quote category  
+
+---
+
+## ❌ Removed / Deprecated Sources
+
+The following sources were removed due to instability or shutdown:
+
+- Quote Garden API  
+- Futurama quote APIs (multiple backends unavailable)  
+- Animechan  
+- Ted Lasso quote APIs  
+- Old Shakespeare APIs (replaced by API Ninjas)  
+
+The extension now favors **datasets and reliable APIs** to avoid breakage.
+
+---
+
+## 🛠 Design Philosophy
+
+- **Dataset‑first** where possible (fast, no auth, no CORS issues)  
+- APIs only when reputable and actively maintained  
+- Automatic fallback for Surprise commands  
+- Clean formatting, Roam‑native links  
+- No cloud storage or external tracking  
+
+---
+
+## 🚀 Recommended Usage
+
+- Use **Surprise Quote** in Daily Notes  
+- Use **Local Quotes** for personal collections  
+- Combine with SmartBlocks for journaling workflows  
+- Add quotes as writing prompts or reflection starters  
+
+---
+
+Happy quoting ✨
