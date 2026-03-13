@@ -689,6 +689,61 @@ export default {
         return "API Ninjas jokes request failed.";
       }
     }
+
+    // ---- Extension Tools API registration ----
+    window.RoamExtensionTools = window.RoamExtensionTools || {};
+    window.RoamExtensionTools["random-quote"] = {
+      name: "Random Quote",
+      version: "1.0",
+      tools: [
+        {
+          name: "rq_fetch_local",
+          description: "Fetch a random quote from the user's local Roam graph quotes page. Returns Roam-formatted blockquote text.",
+          parameters: { type: "object", properties: {} },
+          execute: async () => {
+            const pageTitle = extensionAPI.settings.get("rq-local");
+            if (!pageTitle) {
+              return { error: "No local quotes page configured (set 'Local Quotes page title' in Random Quote settings)." };
+            }
+            try {
+              const raw = await fetchRandomLocalQuote();
+              if (!raw || typeof raw !== "string") return { error: "No quotes found." };
+              return { success: true, text: raw.replace(/\[\[/g, "").replace(/\]\]/g, "") };
+            } catch (e) {
+              return { error: e.message || "Failed to fetch local quote." };
+            }
+          },
+        },
+        {
+          name: "rq_fetch_quote",
+          description: "Fetch a random quote from an online provider (randomly selected). Returns Roam-formatted blockquote text.",
+          parameters: { type: "object", properties: {} },
+          execute: async () => {
+            try {
+              const raw = await fetchSurpriseQuote();
+              if (!raw || typeof raw !== "string") return { error: "No quote providers returned a result." };
+              return { success: true, text: raw.replace(/\[\[/g, "").replace(/\]\]/g, "") };
+            } catch (e) {
+              return { error: e.message || "Failed to fetch quote." };
+            }
+          },
+        },
+        {
+          name: "rq_fetch_joke",
+          description: "Fetch a random joke from an online provider (randomly selected). Returns Roam-formatted blockquote text.",
+          parameters: { type: "object", properties: {} },
+          execute: async () => {
+            try {
+              const raw = await fetchSurpriseJoke();
+              if (!raw || typeof raw !== "string") return { error: "No joke providers returned a result." };
+              return { success: true, text: raw.replace(/\[\[/g, "").replace(/\]\]/g, "") };
+            } catch (e) {
+              return { error: e.message || "Failed to fetch joke." };
+            }
+          },
+        },
+      ],
+    };
   },
 
   onunload: () => {
@@ -697,6 +752,7 @@ export default {
         window.roamjs.extension.smartblocks.unregisterCommand(text)
       );
     }
+    delete window.RoamExtensionTools?.["random-quote"];
   },
 };
 
